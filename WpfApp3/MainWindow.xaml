@@ -14,7 +14,7 @@
         <StackPanel Width="670" HorizontalAlignment="Left" VerticalAlignment="Top" Height="200" >
             <Button Content="+" Width="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="10,30,0,0" Click="Button_Click"/> 
             <Button Content="?" Width="20" HorizontalAlignment="Left"  VerticalAlignment="Top" Margin="40,0,0,0" Click="Button_Click_1"/>
-            <DataGrid x:Name="DG1" ItemsSource="{Binding Users, ElementName=this}" MinWidth="50" MaxWidth="300"  MaxHeight="150" Margin="40,30,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Left"  SelectionChanged="DG1_SelectionChanged"   >
+            <DataGrid x:Name="DG1" ItemsSource="{Binding Path=Users, ElementName=this}" MinWidth="50" MaxWidth="300"  MaxHeight="150" Margin="40,30,0,0" VerticalAlignment="Top" AutoGenerateColumns="False" HorizontalAlignment="Left"  SelectionChanged="DG1_SelectionChanged"   >
                 <DataGrid.Columns>
                     <DataGridTextColumn Header="Imie" Binding="{Binding imie}"/>
                     <DataGridTextColumn Header="Nazwisko" Binding="{Binding nazwisko}"/>

@@ -19,14 +19,16 @@ namespace WpfApp3
     /// </summary>
     public partial class Window1 : Window 
     {
-        public Window1()
+        public Window1(MainWindow mw)
         {
             InitializeComponent();
+            DataContext = mw;
         }
 
         public void zapisz_Click(object sender, RoutedEventArgs e)
         {
             User user = new User(tbName.Text, tbLastName.Text, 0);
+            (DataContext as MainWindow).Users.Add(user);
             MessageBox.Show("Dodano nowego usera:" + user.imie + " " + user.nazwisko);
             this.Close();
         }

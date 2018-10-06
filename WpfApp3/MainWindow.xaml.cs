@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Collections.ObjectModel;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -20,7 +21,7 @@ namespace WpfApp3
     /// </summary>
     public  partial class MainWindow : Window
     {
-      //  public List<User> Users = new List<User>();
+        public ObservableCollection<User> Users = new ObservableCollection<User>();
         public User SelectedUser { get; set; }
         
         public MainWindow()
@@ -32,7 +33,7 @@ namespace WpfApp3
 
 
 
-            User.Users.Add(Patryk);
+            Users.Add(Patryk);
             
             
             InitializeComponent();
@@ -61,7 +62,7 @@ namespace WpfApp3
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            Window1 NewWindow = new Window1();
+            Window1 NewWindow = new Window1(this);
             NewWindow.ShowDialog();
         }
 

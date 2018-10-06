@@ -22,7 +22,6 @@ namespace WpfApp3
             this.liczbaKompow = lKomp;
         }
 
-        public List<User> Users = new List<User>();
     }
 
 }
