@@ -77,7 +77,7 @@ namespace WpfApp3
 
         private void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            XmlSerializer xs = new XmlSerializer(typeof(User));
+            XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<User>));
 
             using (Stream s = File.Create("Users.xml"))
                 xs.Serialize(s, Users);
