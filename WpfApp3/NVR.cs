@@ -17,6 +17,8 @@ namespace WpfApp3
         public string NVRMemory { get; set; }
         public string NVRGraphicsNumber { get; set; }
 
+
+        public NVR () { }
         public NVR (/*string own*/ string nname, string nsdate, string nedate, 
             string ntype, string nmb, string nmem, string ngnum)
         {

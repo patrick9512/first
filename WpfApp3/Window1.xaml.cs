@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
+using System.IO;
 
 namespace WpfApp3
 {
@@ -30,7 +32,11 @@ namespace WpfApp3
             User user = new User(tbName.Text, tbLastName.Text, 0);
             (DataContext as MainWindow).Users.Add(user);
             MessageBox.Show("Dodano nowego usera:" + user.imie + " " + user.nazwisko);
-            this.Close();
+            //XmlSerializer xs = new XmlSerializer(typeof(User));
+
+            //using (Stream s = File.Create("Users.xml"))
+            //    xs.Serialize(s, user);
+            //this.Close();
         }
     }
 }

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Serialization;
 
 namespace WpfApp3
 {
@@ -26,7 +28,7 @@ namespace WpfApp3
         
         public MainWindow()
         {
-            User Patryk = new User("patryk", "chelber", 3 );
+            User Patryk = new User("patryk", "xxxxx", 3 );
             User Zbyszek = new User("Zbyszek", "Kowalski", 5);
 
             //  Patryk.nvry first = new NVR("NVR 7", "01.01.2018", "10.01.2018", "Client", "Z270", "8GB", "2");
@@ -34,8 +36,9 @@ namespace WpfApp3
 
 
             Users.Add(Patryk);
-            
-            
+
+
+
             InitializeComponent();
             
             Patryk.nvry.Add(new NVR("NVR 7", "01.01.2018", "10.01.2018", "Client", "Z270", "8GB", "2"));
@@ -70,6 +73,15 @@ namespace WpfApp3
         {
             DG1.ItemsSource = null;
             DG1.ItemsSource = Users;
+        }
+
+        private void Button_Click_2(object sender, RoutedEventArgs e)
+        {
+            XmlSerializer xs = new XmlSerializer(typeof(User));
+
+            using (Stream s = File.Create("Users.xml"))
+                xs.Serialize(s, Users);
+
         }
     }
 }

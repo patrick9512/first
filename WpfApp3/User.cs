@@ -15,6 +15,8 @@ namespace WpfApp3
         public List<NVR> nvry = new List<NVR>();
 
 
+        public User() { }
+
         public User(string name, string lastName, int lKomp)
         {
             this.imie = name;
@@ -22,6 +24,7 @@ namespace WpfApp3
             this.liczbaKompow = lKomp;
         }
 
+        
     }
 
 }
