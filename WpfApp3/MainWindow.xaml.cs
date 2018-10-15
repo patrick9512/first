@@ -14,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Xml.Linq;
 using System.Xml.Serialization;
 
 namespace WpfApp3
@@ -25,42 +26,52 @@ namespace WpfApp3
     {
         public ObservableCollection<User> Users = new ObservableCollection<User>();
         public User SelectedUser { get; set; }
-        
+
+        XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<User>), new XmlRootAttribute("ArrayOfUser"));
+        XElement UsersFromFile = XElement.Load(@"Users.xml");
+
         public MainWindow()
         {
-            User Patryk = new User("patryk", "xxxxx", 3 );
-            User Zbyszek = new User("Zbyszek", "Kowalski", 5);
-
-            //  Patryk.nvry first = new NVR("NVR 7", "01.01.2018", "10.01.2018", "Client", "Z270", "8GB", "2");
-
-
-
-            Users.Add(Patryk);
-
 
 
             InitializeComponent();
-            
-            Patryk.nvry.Add(new NVR("NVR 7", "01.01.2018", "10.01.2018", "Client", "Z270", "8GB", "2"));
-            Patryk.nvry.Add(new NVR("NVR 7-T", "01.02.2018", "10.02.2018", "Server", "Z270", "8GB", "1"));
-            Zbyszek.nvry.Add(new NVR("NVR 7-T", "01.02.2018", "10.02.2018", "Server", "Z270", "8GB", "1"));
 
 
-            
-            DG1.ItemsSource = Users;
-            
+
+            DG1.ItemsSource = LoadUser();
+
 
 
         }
 
 
+        //public ObservableCollection<User> LoadUsers()
+        //{
+
+        //    XElement UsersFromFile = XElement.Load(@"Users.xml");
+        //    //XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<User>), new XmlRootAttribute("ArrayOfUser"));
+        //    StringReader stringReader = new StringReader(UsersFromFile.ToString());
+        //    return (ObservableCollection<User>)xs.Deserialize(stringReader);
+        //}
 
 
+        public StringReader ReadUsersFromFile()
+        {
+            //XElement UsersFromFile = XElement.Load(@"Users.xml");
+            StringReader stringReader = new StringReader(UsersFromFile.ToString());
+            return stringReader;
+        }
+
+        private ObservableCollection<User> LoadUser()
+        {
+            
+            return (ObservableCollection<User>)xs.Deserialize(ReadUsersFromFile());
+        }
 
         private void DG1_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             SelectedUser = (sender as DataGrid).SelectedItem as User;
-            DG2.ItemsSource = SelectedUser.nvry;
+           // DG2.ItemsSource = SelectedUser.nvry;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
@@ -75,13 +86,21 @@ namespace WpfApp3
             DG1.ItemsSource = Users;
         }
 
-        private void Button_Click_2(object sender, RoutedEventArgs e)
+        public void Button_Click_2(object sender, RoutedEventArgs e)
         {
             XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<User>));
 
             using (Stream s = File.Create("Users.xml"))
                 xs.Serialize(s, Users);
 
+        }
+
+        public void SerializeUser ()
+        {
+            //  XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<User>));
+
+            using (Stream s = File.Create("Users.xml"))
+            xs.Serialize(s ,Users);
         }
     }
 }
