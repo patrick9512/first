@@ -32,6 +32,7 @@ namespace WpfApp3
             User user = new User(tbName.Text, tbLastName.Text, 0);
             (DataContext as MainWindow).Users.Add(user);
             MessageBox.Show("Dodano nowego usera:" + user.imie + " " + user.nazwisko);
+
             (DataContext as MainWindow).SerializeUser();
             this.Close();
         }

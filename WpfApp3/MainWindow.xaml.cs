@@ -37,22 +37,22 @@ namespace WpfApp3
             InitializeComponent();
 
 
-
-            DG1.ItemsSource = LoadUser();
-
+            Users = LoadUser();
+            DG1.ItemsSource = Users;
+            
 
 
         }
 
 
-        //public ObservableCollection<User> LoadUsers()
-        //{
+        public ObservableCollection<User> LoadUsers()
+        {
 
-        //    XElement UsersFromFile = XElement.Load(@"Users.xml");
-        //    //XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<User>), new XmlRootAttribute("ArrayOfUser"));
-        //    StringReader stringReader = new StringReader(UsersFromFile.ToString());
-        //    return (ObservableCollection<User>)xs.Deserialize(stringReader);
-        //}
+            XElement UsersFromFile = XElement.Load(@"Users.xml");
+            //XmlSerializer serializer = new XmlSerializer(typeof(ObservableCollection<User>), new XmlRootAttribute("ArrayOfUser"));
+            StringReader stringReader = new StringReader(UsersFromFile.ToString());
+            return (ObservableCollection<User>)xs.Deserialize(stringReader);
+        }
 
 
         public StringReader ReadUsersFromFile()
@@ -64,7 +64,7 @@ namespace WpfApp3
 
         private ObservableCollection<User> LoadUser()
         {
-            
+
             return (ObservableCollection<User>)xs.Deserialize(ReadUsersFromFile());
         }
 
@@ -88,7 +88,7 @@ namespace WpfApp3
 
         public void Button_Click_2(object sender, RoutedEventArgs e)
         {
-            XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<User>));
+            //XmlSerializer xs = new XmlSerializer(typeof(ObservableCollection<User>));
 
             using (Stream s = File.Create("Users.xml"))
                 xs.Serialize(s, Users);
